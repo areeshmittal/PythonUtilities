@@ -1,5 +1,11 @@
 __author__ = 'Areesh Mittal'
 
+'''This file is meant for visualizing a phi-divergence (also known as F-divergence)
+ball for any valid function phi. Please see https://en.wikipedia.org/wiki/F-divergence
+for more info on phi-divergences. 'plot_phi_div' is the main function of this file.
+See its documentation for how to use it. Also see the end of file for examples
+of some commonly used phi divergences. New functions can be added easily'''
+
 import scipy
 import matplotlib.pyplot as plt
 import warnings
@@ -30,11 +36,11 @@ def draw_prob_simplex(ax,draw_grid = True):
     ax.set_aspect('equal')
     ax.axis('off')
     boundary = [[0,.5,1,0],[0,3**.5/2,0,0]]
-    ax.plot(*boundary,'k')
+    ax.plot(*boundary,'k',lw = 3)
 
-    ax.text(-.1,-.05,'(0,0,1)',fontsize = 20)
-    ax.text(.9, -.05,'(1,0,0)',fontsize = 20)
-    ax.text(.4,  .9, '(0,1,0)',fontsize = 20)
+    ax.text(-.1,-.1,'(0,0,1)',fontsize = 25)
+    ax.text(.9, -.1,'(1,0,0)',fontsize = 25)
+    ax.text(.4,  .9, '(0,1,0)',fontsize = 25)
     
     if draw_grid == True:
         plot_grid_lines(ax)
@@ -77,8 +83,8 @@ def plot_phi_div(phi, rho, q = uniform, npoints = 50000, draw_grid = True):
 #    ax.scatter(points[:,0],points[:,1],s = 1)
     
     hull = ConvexHull(points)
-    ax.plot(points[hull.vertices,0],points[hull.vertices,1],'k')
-    ax.plot(points[hull.vertices[[-1,0]],0],points[hull.vertices[[-1,0]],1],'k')
+    ax.plot(points[hull.vertices,0],points[hull.vertices,1],'k',lw = 3)
+    ax.plot(points[hull.vertices[[-1,0]],0],points[hull.vertices[[-1,0]],1],'k',lw = 3)
     
     proj_q = project(q)
     ax.scatter(proj_q[0],proj_q[1],c = 'r')
